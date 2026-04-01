@@ -276,14 +276,6 @@ Add-Computer
 
 ---
 
-## Snapshots Taken
-
-| VM | Snapshot Name | Taken After |
-|---|---|---|
-| DC1 | *(existing: Fresh XYZ Domain Set...)* | No new snapshot needed |
-| WS01 | Joined to XYZ Domain (Post-Rejoin) | After re-joining the domain in Step 7 |
-
----
 
 ## Key Takeaways
 
