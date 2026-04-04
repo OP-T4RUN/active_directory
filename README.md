@@ -39,7 +39,8 @@ Host Machine (AMD Ryzen 7 7445HS)
 | [Chapter 0](Chapters/Chapter-0/README.md) | Creating Our Server + Workstation Virtual Environment | ✅ Complete |
 | [Chapter 1](Chapters/Chapter-1/README.md) | Joining a Home Lab Domain (Installing the Domain Controller) | ✅ Complete |
 | [Chapter 2](Chapters/Chapter-2/README.md) | Automating Domain Users & Groups | ✅ Complete |
-| Chapter 3 | Random Users & Weak Passwords | 🔜 Upcoming |
+| [Chapter 3](Chapters/Chapter-3/README.md) | Random Users & Weak Passwords | ✅ Complete |
+| Chapter 4 | Fix Disabled Accounts / Password Policy | 🔜 Upcoming |
 | Future | BloodHound Enumeration | 🔜 Upcoming |
 | Future | Kerberoasting | 🔜 Upcoming |
 | Future | Pass-the-Hash / Pass-the-Ticket | 🔜 Upcoming |
@@ -68,21 +69,29 @@ Host Machine (AMD Ryzen 7 7445HS)
 
 ### Domain Users
 
-| Username | Full Name | Group | Status |
-|---|---|---|---|
-| Administrator | — | Domain Admins | Enabled |
-| alice | Alice lice | Employees | Enabled |
-| bob | Bob Ob | Employees | Enabled |
-| Guest | — | — | Disabled |
-| krbtgt | — | — | Disabled |
+| Username | Full Name | Group | Status | Added In |
+|---|---|---|---|---|
+| Administrator | — | Domain Admins | Enabled | Chapter 1 |
+| Guest | — | — | Disabled | Chapter 1 |
+| krbtgt | — | — | Disabled | Chapter 1 |
+| ~100 random users | Various | Various random groups | Mixed | Chapter 3 |
+
+> Note: Chapter 2 users (alice, bob) were removed when DC1 was reverted to a clean snapshot before Chapter 3.
 
 ### Domain Groups
 
-| Group | Scope | Purpose |
+| Group | Scope | Added In |
 |---|---|---|
-| Domain Admins | Global | Built-in admin group |
-| Employees | Global | Custom group — created in Chapter 2 |
-| DnsAdmins | Domain Local | DNS administration |
+| Domain Admins | Global | Chapter 1 |
+| DnsAdmins | Domain Local | Chapter 1 |
+| Employees | Global | Chapter 3 |
+| Engineers | Global | Chapter 3 |
+| Lawyer | Global | Chapter 3 |
+| Managers | Global | Chapter 3 |
+| Developers | Global | Chapter 3 |
+| Student | Global | Chapter 3 |
+| Executives | Global | Chapter 3 |
+| + 3 more random groups | Global | Chapter 3 |
 
 ---
 
@@ -90,14 +99,16 @@ Host Machine (AMD Ryzen 7 7445HS)
 
 | Tool | Category | Chapters |
 |---|---|---|
-| VMware Workstation Pro 17 | Virtualization | 0, 1 |
-| Windows Server 2022 | OS | 0, 1 |
-| Windows 11 Pro N | OS | 0, 1 |
-| PowerShell | Scripting / Mgmt | 1, 2 |
+| VMware Workstation Pro 17 | Virtualization | 0, 1, 2, 3 |
+| Windows Server 2022 | OS | 0, 1, 2, 3 |
+| Windows 11 Pro N | OS | 0, 1, 2, 3 |
+| PowerShell | Scripting / Mgmt | 1, 2, 3 |
 | sconfig | Server Config | 1 |
 | AD DS Role | Active Directory | 1 |
-| PS Remoting | Remote Mgmt | 1, 2 |
-| JSON Schema | IaC / Config | 2 |
+| PS Remoting | Remote Mgmt | 1, 2, 3 |
+| JSON Schema | IaC / Config | 2, 3 |
+| secedit | Security Policy | 3 |
+| Get-Random / ArrayList | PS Random Selection | 3 |
 | BloodHound | AD Enumeration | 🔜 |
 | Impacket | AD Attacks | 🔜 |
 | PowerView | AD Enumeration | 🔜 |
@@ -108,25 +119,29 @@ Host Machine (AMD Ryzen 7 7445HS)
 ```
 active_directory/
 ├── README.md
-├── code/                             ← All scripts & data files (shared across chapters)
-│   ├── gen_ad.ps1                    ← Chapter 2: Static AD generation script
-│   ├── ad_schema.json                ← Chapter 2: Static AD schema
-│   ├── gen_ad_random.ps1             ← Chapter 3: Random AD generation script
-│   ├── ad_schema_random.json         ← Chapter 3: Randomly generated AD schema
-│   ├── groupnames.txt                ← Chapter 3: Group name dataset
-│   ├── firstnames.txt                ← Chapter 3: First name dataset
-│   ├── lastnames.txt                 ← Chapter 3: Last name dataset
-│   └── weakpasswords.txt             ← Chapter 3: Sanitised weak password list
+├── code/
+│   ├── data/
+│   │   ├── first_names.txt
+│   │   ├── group_names.txt
+│   │   ├── last_names.txt
+│   │   └── passwords.txt
+│   ├── ad_schema.json            ← Chapter 2: Static schema
+│   ├── gen_ad.ps1                ← Chapter 2 & 3: AD object creation script
+│   ├── out.json                  ← Chapter 3: Generated random schema
+│   └── random_domain.ps1         ← Chapter 3: Random schema generator
 └── Chapters/
     ├── Chapter-0/
     │   ├── README.md
-    │   └── screenshots/              (13 screenshots)
+    │   └── screenshots/          (13 screenshots)
     ├── Chapter-1/
     │   ├── README.md
-    │   └── screenshots/              (12 screenshots)
-    └── Chapter-2/
+    │   └── screenshots/          (12 screenshots)
+    ├── Chapter-2/
+    │   ├── README.md
+    │   └── screenshots/          (8 screenshots)
+    └── Chapter-3/
         ├── README.md
-        └── screenshots/              (8 screenshots)
+        └── screenshots/          (11 screenshots)
 ```
 
 ---
