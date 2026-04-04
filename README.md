@@ -39,7 +39,7 @@ Host Machine (AMD Ryzen 7 7445HS)
 | [Chapter 0](Chapters/Chapter-0/README.md) | Creating Our Server + Workstation Virtual Environment | ✅ Complete |
 | [Chapter 1](Chapters/Chapter-1/README.md) | Joining a Home Lab Domain (Installing the Domain Controller) | ✅ Complete |
 | [Chapter 2](Chapters/Chapter-2/README.md) | Automating Domain Users & Groups | ✅ Complete |
-| Chapter 3 | AD User Management / Group Policy | 🔜 Upcoming |
+| Chapter 3 | Random Users & Weak Passwords | 🔜 Upcoming |
 | Future | BloodHound Enumeration | 🔜 Upcoming |
 | Future | Kerberoasting | 🔜 Upcoming |
 | Future | Pass-the-Hash / Pass-the-Ticket | 🔜 Upcoming |
@@ -108,19 +108,25 @@ Host Machine (AMD Ryzen 7 7445HS)
 ```
 active_directory/
 ├── README.md
+├── code/                             ← All scripts & data files (shared across chapters)
+│   ├── gen_ad.ps1                    ← Chapter 2: Static AD generation script
+│   ├── ad_schema.json                ← Chapter 2: Static AD schema
+│   ├── gen_ad_random.ps1             ← Chapter 3: Random AD generation script
+│   ├── ad_schema_random.json         ← Chapter 3: Randomly generated AD schema
+│   ├── groupnames.txt                ← Chapter 3: Group name dataset
+│   ├── firstnames.txt                ← Chapter 3: First name dataset
+│   ├── lastnames.txt                 ← Chapter 3: Last name dataset
+│   └── weakpasswords.txt             ← Chapter 3: Sanitised weak password list
 └── Chapters/
     ├── Chapter-0/
     │   ├── README.md
-    │   └── screenshots/          (13 screenshots)
+    │   └── screenshots/              (13 screenshots)
     ├── Chapter-1/
     │   ├── README.md
-    │   └── screenshots/          (12 screenshots)
+    │   └── screenshots/              (12 screenshots)
     └── Chapter-2/
         ├── README.md
-        ├── screenshots/          (8 screenshots)
-        └── code/
-            ├── gen_ad.ps1
-            └── ad_schema.json
+        └── screenshots/              (8 screenshots)
 ```
 
 ---
