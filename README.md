@@ -40,7 +40,7 @@ Host Machine (AMD Ryzen 7 7445HS)
 | [Chapter 1](Chapters/Chapter-1/README.md) | Joining a Home Lab Domain (Installing the Domain Controller) | ✅ Complete |
 | [Chapter 2](Chapters/Chapter-2/README.md) | Automating Domain Users & Groups | ✅ Complete |
 | [Chapter 3](Chapters/Chapter-3/README.md) | Random Users & Weak Passwords | ✅ Complete |
-| Chapter 4 | Fix Disabled Accounts / Password Policy | 🔜 Upcoming |
+| [Chapter 4](Chapters/Chapter-4/README.md) | Tearing Down the Domain Controller | ✅ Complete |
 | Future | BloodHound Enumeration | 🔜 Upcoming |
 | Future | Kerberoasting | 🔜 Upcoming |
 | Future | Pass-the-Hash / Pass-the-Ticket | 🔜 Upcoming |
@@ -74,9 +74,9 @@ Host Machine (AMD Ryzen 7 7445HS)
 | Administrator | — | Domain Admins | Enabled | Chapter 1 |
 | Guest | — | — | Disabled | Chapter 1 |
 | krbtgt | — | — | Disabled | Chapter 1 |
-| ~100 random users | Various | Various random groups | Mixed | Chapter 3 |
+| ~100 random users | Various | Various random groups | Mixed (see Ch3/Ch4) | Chapter 3 |
 
-> Note: Chapter 2 users (alice, bob) were removed when DC1 was reverted to a clean snapshot before Chapter 3.
+> Note: Chapter 2 users (alice, bob) were removed when DC1 was reverted to a clean snapshot before Chapter 3. Chapter 4 introduced a full teardown workflow — all random users and groups can now be cleanly removed via `gen_ad.ps1 -Undo`.
 
 ### Domain Groups
 
@@ -93,21 +93,23 @@ Host Machine (AMD Ryzen 7 7445HS)
 | Executives | Global | Chapter 3 |
 | + 3 more random groups | Global | Chapter 3 |
 
+> Note: All Chapter 3 random groups are removed when `gen_ad.ps1 -Undo` is run. New random groups are generated each rebuild.
+
 ---
 
 ## 🧰 Tools Used
 
 | Tool | Category | Chapters |
 |---|---|---|
-| VMware Workstation Pro 17 | Virtualization | 0, 1, 2, 3 |
-| Windows Server 2022 | OS | 0, 1, 2, 3 |
-| Windows 11 Pro N | OS | 0, 1, 2, 3 |
-| PowerShell | Scripting / Mgmt | 1, 2, 3 |
+| VMware Workstation Pro 17 | Virtualization | 0, 1, 2, 3, 4 |
+| Windows Server 2022 | OS | 0, 1, 2, 3, 4 |
+| Windows 11 Pro N | OS | 0, 1, 2, 3, 4 |
+| PowerShell | Scripting / Mgmt | 1, 2, 3, 4 |
 | sconfig | Server Config | 1 |
 | AD DS Role | Active Directory | 1 |
-| PS Remoting | Remote Mgmt | 1, 2, 3 |
-| JSON Schema | IaC / Config | 2, 3 |
-| secedit | Security Policy | 3 |
+| PS Remoting | Remote Mgmt | 1, 2, 3, 4 |
+| JSON Schema | IaC / Config | 2, 3, 4 |
+| secedit | Security Policy | 3, 4 |
 | Get-Random / ArrayList | PS Random Selection | 3 |
 | BloodHound | AD Enumeration | 🔜 |
 | Impacket | AD Attacks | 🔜 |
@@ -126,8 +128,8 @@ active_directory/
 │   │   ├── last_names.txt
 │   │   └── passwords.txt
 │   ├── ad_schema.json            ← Chapter 2: Static schema
-│   ├── gen_ad.ps1                ← Chapter 2 & 3: AD object creation script
-│   ├── out.json                  ← Chapter 3: Generated random schema
+│   ├── gen_ad.ps1                ← Chapter 2–4: AD object creation + teardown script
+│   ├── out.json                  ← Chapter 3–4: Generated random schema
 │   └── random_domain.ps1         ← Chapter 3: Random schema generator
 └── Chapters/
     ├── Chapter-0/
@@ -139,9 +141,12 @@ active_directory/
     ├── Chapter-2/
     │   ├── README.md
     │   └── screenshots/          (8 screenshots)
-    └── Chapter-3/
+    ├── Chapter-3/
+    │   ├── README.md
+    │   └── screenshots/          (11 screenshots)
+    └── Chapter-4/
         ├── README.md
-        └── screenshots/          (11 screenshots)
+        └── screenshots/          (10 screenshots)
 ```
 
 ---
